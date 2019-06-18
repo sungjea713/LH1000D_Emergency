@@ -14,6 +14,10 @@ namespace LH1000D_Emergency.Model
     {
         public string PathFolder { get; set; }
         public string Status { get; set; }
+
+        bool isTrueRecord;
+        bool isFalseRecord;
+
         DirectoryInfo dir;
         Thread thEmergency;
 
@@ -25,6 +29,9 @@ namespace LH1000D_Emergency.Model
             dir = new DirectoryInfo(PathFolder);
 
             Status = "false";
+
+            isTrueRecord = false;
+            isFalseRecord = true;
 
             File.WriteAllText(PathFolder + "/emergency.txt", Status);
             InitAjinModule();
@@ -56,8 +63,23 @@ namespace LH1000D_Emergency.Model
             {
                 if(IsEmergency())
                 {
-                    Status = "true";
-                    File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                    if(!isTrueRecord)
+                    {
+                        Status = "true";
+                        File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                        isTrueRecord = true;
+                        isFalseRecord = false;
+                    }
+                }
+                else
+                {
+                    if(!isFalseRecord)
+                    {
+                        Status = "false";
+                        File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                        isFalseRecord = true;
+                        isTrueRecord = false;
+                    }
                 }
                 Thread.Sleep(10);
             }
