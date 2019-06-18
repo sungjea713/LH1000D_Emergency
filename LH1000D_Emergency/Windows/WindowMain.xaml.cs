@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LH1000D_Emergency
+namespace LH1000D_Emergency.Windows
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// WindowMain.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WindowMain : Window
     {
-        public MainWindow()
+        public WindowMain()
         {
             InitializeComponent();
+
+            System.Windows.Forms.NotifyIcon tray = new System.Windows.Forms.NotifyIcon();
+            //tray.Icon = new System.Drawing.Icon("EMERGENCY_16.ico");
+            //tray.Visible = true;
+
+            this.WindowState = WindowState.Minimized;
         }
     }
 }
