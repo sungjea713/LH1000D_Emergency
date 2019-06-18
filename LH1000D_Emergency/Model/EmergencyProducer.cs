@@ -44,7 +44,7 @@ namespace LH1000D_Emergency.Model
             {
                 uint value = 0;
                 CAXD.AxdiReadInportBit(0,0, ref value);
-                if (value == 0) return false;
+                if (value == 1) return false;
                 else return true;
             }
             else
