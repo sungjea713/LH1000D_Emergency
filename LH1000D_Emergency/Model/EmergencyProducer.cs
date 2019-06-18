@@ -17,6 +17,7 @@ namespace LH1000D_Emergency.Model
 
         bool isTrueRecord;
         bool isFalseRecord;
+        bool onTrigger;
 
         DirectoryInfo dir;
         Thread thEmergency;
@@ -29,11 +30,24 @@ namespace LH1000D_Emergency.Model
             dir = new DirectoryInfo(PathFolder);
 
             Status = "false";
+            onTrigger = false;
 
             isTrueRecord = false;
             isFalseRecord = true;
 
-            File.WriteAllText(PathFolder + "/emergency.txt", Status);
+            while(true)
+            {
+                try
+                {
+                    File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                    break;
+                }
+                catch
+                {
+                    Thread.Sleep(20);
+                }
+            }
+
             InitAjinModule();
             thEmergency = new Thread(new ThreadStart(ThreadEmergency));
             thEmergency.IsBackground = true;
@@ -42,7 +56,7 @@ namespace LH1000D_Emergency.Model
 
         public void InitAjinModule()
         {
-            CAXL.AxlOpen();
+            //CAXL.AxlOpen();
             
         }
         public bool IsEmergency()
@@ -61,28 +75,55 @@ namespace LH1000D_Emergency.Model
         {
             while(true)
             {
-                if(IsEmergency())
+                if (onTrigger)
                 {
-                    if(!isTrueRecord)
+                    if (!IsEmergency())
                     {
                         Status = "true";
-                        File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                        while (true)
+                        {
+                            try
+                            {
+                                File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                                break;
+                            }
+                            catch
+                            {
+                                Thread.Sleep(20);
+                            }
+                        }
                         isTrueRecord = true;
                         isFalseRecord = false;
                     }
                 }
                 else
                 {
-                    if(!isFalseRecord)
+                    if (!isFalseRecord)
                     {
                         Status = "false";
-                        File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                        while (true)
+                        {
+                            try
+                            {
+                                File.WriteAllText(PathFolder + "/emergency.txt", Status);
+                                break;
+                            }
+                            catch
+                            {
+                                Thread.Sleep(20);
+                            }
+                        }
                         isFalseRecord = true;
                         isTrueRecord = false;
                     }
                 }
+
                 Thread.Sleep(10);
             }
+        }
+        public void Trigger()
+        {
+            onTrigger = true;
         }
     }
 }

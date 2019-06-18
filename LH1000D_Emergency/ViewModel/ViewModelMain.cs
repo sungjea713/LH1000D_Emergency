@@ -18,5 +18,13 @@ namespace LH1000D_Emergency.ViewModel
         {
 
         }
+
+        #region commands
+        void TriggerExcute()
+        {
+            emg.Trigger();
+        }
+        public ICommand Trigger { get { return new RelayCommand(TriggerExcute); } }
+        #endregion
     }
 }

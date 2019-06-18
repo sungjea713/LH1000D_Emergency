@@ -11,6 +11,7 @@
         <vm:ViewModelMain/>
     </Window.DataContext>
     <Grid>
-        
+        <Button x:Name="trigger" Command="{Binding Trigger}" Content="Trigger" Margin="232.598,130.732,338.268,172.289"/>
+
     </Grid>
 </Window>
