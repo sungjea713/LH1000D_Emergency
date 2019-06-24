@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LH1000D_Emergency.Windows"
         xmlns:vm="clr-namespace:LH1000D_Emergency.ViewModel"
         mc:Ignorable="d"
-        Title="WindowMain" Height="450" Width="800">
+        Title="WindowMain" Height="450" Width="800" ShowInTaskbar="False">
     <Window.DataContext>
         <vm:ViewModelMain/>
     </Window.DataContext>

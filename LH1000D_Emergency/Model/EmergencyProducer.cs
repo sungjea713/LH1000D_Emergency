@@ -56,7 +56,7 @@ namespace LH1000D_Emergency.Model
 
         public void InitAjinModule()
         {
-            CAXL.AxlOpen();
+            //CAXL.AxlOpen();
             
         }
         public bool IsEmergency()
