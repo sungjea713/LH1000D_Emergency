@@ -56,7 +56,7 @@ namespace LH1000D_Emergency.Model
 
         public void InitAjinModule()
         {
-            //CAXL.AxlOpen();
+            CAXL.AxlOpen();
             
         }
         public bool IsEmergency()
@@ -75,9 +75,9 @@ namespace LH1000D_Emergency.Model
         {
             while(true)
             {
-                if (onTrigger)
+                if (IsEmergency())
                 {
-                    if (!IsEmergency())
+                    if (!isTrueRecord)
                     {
                         Status = "true";
                         while (true)
